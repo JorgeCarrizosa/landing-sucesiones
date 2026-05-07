@@ -44,7 +44,7 @@
     --muted:#6b6a66;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
+  html,body{margin:0;padding:0;overflow-x:hidden}
   body{
     font-family:"Montserrat",-apple-system,BlinkMacSystemFont,sans-serif;
     color:var(--body);
@@ -66,7 +66,10 @@
   }
   p{margin:0;text-wrap:pretty}
   a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
+  /* Evitar que los hijos de grids desborden su columna */
+  .hero-grid > *,.section-header > *,.contact-grid > *,.calc-grid > *,
+  .partner-row > *,.services-grid > *,.process-grid > *,.footer-grid > *{min-width:0}
   button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
   .container{max-width:1240px;margin:0 auto;padding:0 32px}
   .eyebrow{
@@ -337,6 +340,7 @@
     position:relative;overflow:hidden;
   }
   .partner-photo img{
+    position:absolute;inset:0;
     width:100%;height:100%;
     object-fit:cover;object-position:top center;
     display:block;
@@ -373,6 +377,7 @@
     display:inline-flex;gap:8px;align-items:center;
     border-bottom:1px solid var(--line);
     padding-bottom:6px;transition:border-color .2s;
+    overflow-wrap:break-word;word-break:break-all;
   }
   .partner-contact a:hover{border-color:var(--ink)}
   .partner-contact .ic{
@@ -664,6 +669,7 @@
   .contact-detail .val{
     font-family:"EB Garamond",serif;font-size:20px;
     color:#fff;line-height:1.4;
+    overflow-wrap:break-word;word-break:break-word;min-width:0;
   }
   .contact-detail .val small{
     display:block;font-family:"Montserrat",sans-serif;
@@ -871,11 +877,12 @@
     .quote-mark{font-size:72px}
 
     /* Contact */
-    .contact-info h2{font-size:32px}
+    .contact-info h2{font-size:28px}
     .contact-info > p{font-size:14.5px}
-    .contact-detail{gap:12px;padding:18px 0;flex-direction:column}
-    .contact-detail .lbl{width:auto;font-size:9.5px}
-    .contact-detail .val{font-size:18px}
+    .contact-detail{gap:8px;padding:16px 0;flex-direction:column}
+    .contact-detail .lbl{width:auto;font-size:9px;letter-spacing:0.18em}
+    .contact-detail .val{font-size:17px}
+    .contact-detail .val a{word-break:break-all}
     .form-card{padding:36px 24px}
     .form-card h3{font-size:24px}
     .form-row{grid-template-columns:1fr;gap:0}
@@ -970,7 +977,7 @@
       <div class="portraits">
         <div class="portrait">
           <div class="portrait-img">
-            <img src="https://cdn.website-editor.net/s/c663cff990dc4200b863b320602ed23e/dms3rep/multi/WhatsApp-Image-2024-09-02-at-19.42.48-52a0c4f1.jpg"
+            <img src="img/carlos-carrizosa.jpg"
                  alt="Carlos Carrizosa, socio fundador" loading="eager" />
           </div>
           <div class="portrait-caption">
@@ -980,7 +987,7 @@
         </div>
         <div class="portrait">
           <div class="portrait-img">
-            <img src="https://cdn.website-editor.net/s/c663cff990dc4200b863b320602ed23e/dms3rep/multi/DSCF5656-1efe68ac.jpg"
+            <img src="img/marisa-almazor.jpg"
                  alt="Marisa Almazor, socia directora" loading="eager" />
           </div>
           <div class="portrait-caption">
@@ -1081,7 +1088,7 @@
 
       <div class="partner-row">
         <div class="partner-photo">
-          <img src="https://cdn.website-editor.net/s/c663cff990dc4200b863b320602ed23e/dms3rep/multi/WhatsApp-Image-2024-09-02-at-19.42.48-52a0c4f1.jpg"
+          <img src="img/carlos-carrizosa.jpg"
                alt="Carlos Carrizosa, abogado y socio fundador del despacho" loading="lazy" />
         </div>
         <div class="partner-info">
@@ -1140,7 +1147,7 @@
           </div>
         </div>
         <div class="partner-photo">
-          <img src="https://cdn.website-editor.net/s/c663cff990dc4200b863b320602ed23e/dms3rep/multi/DSCF5656-1efe68ac.jpg"
+          <img src="img/marisa-almazor.jpg"
                alt="Marisa Almazor, abogada directora del despacho" loading="lazy" />
         </div>
       </div>
