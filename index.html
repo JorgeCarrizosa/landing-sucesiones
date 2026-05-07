@@ -768,6 +768,10 @@
     }
     .partner-row.reverse .partner-photo{order:0}
     .services-grid{grid-template-columns:1fr}
+    .process-grid{grid-template-columns:repeat(2,1fr)}
+    .step{border-right:none;border-bottom:1px solid var(--line);padding:32px 0}
+    .step:last-child{border-bottom:none}
+    .calc-grid{grid-template-columns:1fr}
     .topbar-left span:nth-child(n+2){display:none}
 
     /* Nav: collapse to drawer */
@@ -812,8 +816,8 @@
     .topbar-left span:first-child{display:inline}
     .topbar-right{display:none}
 
-    .brand-name{font-size:30px}
-    .brand-name small{font-size:9.5px;letter-spacing:0.32em;margin-left:10px}
+    .brand-name{font-size:26px;white-space:normal}
+    .brand-name small{font-size:9px;letter-spacing:0.28em;margin-left:8px}
 
     /* Hero */
     .hero{padding:56px 0 64px}
@@ -843,7 +847,8 @@
     .intro p{font-size:15px}
 
     /* Sections */
-    section.services,section.partners,section.quote,section.contact{padding:72px 0}
+    section.services,section.partners,section.quote,section.contact,
+    section.process,section.faq,section.calc{padding:72px 0}
     .section-header{gap:24px;margin-bottom:48px}
     .section-header h2{font-size:32px}
     .section-header p{font-size:14.5px}
@@ -876,10 +881,21 @@
     .form-row{grid-template-columns:1fr;gap:0}
     .first-consult-badge{font-size:10px;padding:9px 14px}
 
+    /* Process */
+    .process-grid{grid-template-columns:1fr}
+    .step{padding:24px 0}
+
+    /* FAQ */
+    details.qa summary{font-size:18px;padding:22px 40px 22px 0}
+
+    /* Calc */
+    .calc-card{padding:32px 22px}
+    .calc-result-value{font-size:36px}
+
     /* Footer */
     footer{padding:56px 0 24px}
     .footer-grid{gap:36px;padding-bottom:40px}
-    .footer-brand .brand-name{font-size:28px}
+    .footer-brand .brand-name{font-size:26px;white-space:normal}
     .footer-bottom{flex-direction:column;align-items:flex-start;text-align:left;font-size:11.5px}
     .footer-bottom .legal{flex-wrap:wrap;gap:16px}
   }
@@ -1323,8 +1339,7 @@
       -->
       <form class="form-card" id="contacto-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
 
-        <!-- Access Key de Web3Forms — SUSTITUIR -->
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="access_key" value="95543e2d-0168-42c0-a329-c55425ffb9b0" />
         <input type="hidden" name="to" value="abogados@carrizosayalmazor.com" />
         <input type="hidden" name="subject" value="Nueva consulta desde la web — Herencias y Sucesiones" />
 
