@@ -15,10 +15,23 @@
          whatsapp   → "Clic WhatsApp landing"
        (etiqueta vacía en CYA_ADS.labels = esa conversión no se dispara)
   ═══════════════════════════════════════════════════════════════ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17531743025"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    /* Consent Mode v2 (RGPD/EEE): todo denegado por defecto.
+       Solo se activa si el visitante acepta en el banner de cookies. */
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17531743025"></script>
+  <script>
     gtag('js', new Date());
     gtag('config', 'AW-17531743025');
 
@@ -35,6 +48,32 @@
       if(!etiqueta) return;
       gtag('event','conversion',{'send_to': window.CYA_ADS.id + '/' + etiqueta});
     };
+
+    /* Consentimiento: la elección se guarda 12 meses en localStorage */
+    window.cyaConsent = {
+      leer: function(){
+        try {
+          var c = JSON.parse(localStorage.getItem('cya_consent') || 'null');
+          if (c && (Date.now() - c.ts) < 365*24*60*60*1000) return c;
+        } catch(e) {}
+        return null;
+      },
+      guardar: function(acepta){
+        try { localStorage.setItem('cya_consent', JSON.stringify({granted: acepta, ts: Date.now()})); } catch(e) {}
+        if (acepta) {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+        }
+      }
+    };
+    (function(){
+      var c = window.cyaConsent.leer();
+      if (c && c.granted) window.cyaConsent.guardar(true);
+    })();
   </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -757,6 +796,42 @@
   .footer-bottom .legal{display:flex;gap:24px}
   .footer-bottom .legal a:hover{color:#c9a35a}
 
+  /* COOKIE BANNER */
+  .cookie-banner{
+    position:fixed;left:0;right:0;bottom:0;z-index:100;
+    background:var(--ink);color:#fff;
+    padding:20px 32px;
+    display:none;
+    box-shadow:0 -6px 24px rgba(0,0,0,.18);
+  }
+  .cookie-banner.visible{display:block}
+  .cookie-inner{
+    max-width:1240px;margin:0 auto;
+    display:flex;gap:28px;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .cookie-text{
+    font-size:13px;line-height:1.6;color:rgba(255,255,255,.85);
+    max-width:760px;min-width:260px;flex:1;
+  }
+  .cookie-text a{color:#c9a35a;text-decoration:underline}
+  .cookie-actions{display:flex;gap:12px;flex-shrink:0}
+  .cookie-btn{
+    padding:13px 24px;font-size:12px;font-weight:600;
+    letter-spacing:0.12em;text-transform:uppercase;
+    cursor:pointer;transition:opacity .2s;
+    border:1px solid rgba(255,255,255,.6);
+  }
+  .cookie-btn:hover{opacity:.85}
+  .cookie-btn.aceptar{background:#c9a35a;border-color:#c9a35a;color:#040465}
+  .cookie-btn.rechazar{background:transparent;color:#fff}
+  @media(max-width:680px){
+    .cookie-banner{padding:16px 22px}
+    .cookie-inner{gap:14px}
+    .cookie-actions{width:100%}
+    .cookie-btn{flex:1;text-align:center;padding:14px 10px}
+  }
+
   /* Mobile menu toggle */
   .nav-toggle{
     display:none;
@@ -1453,6 +1528,7 @@
         <div class="legal">
           <a href="https://www.carrizosayalmazor.com/condiciones-uso" target="_blank" rel="noopener">Condiciones de Uso</a>
           <a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>
+          <a href="#" onclick="cyaCookiePrefs();return false;">Cookies</a>
         </div>
       </div>
     </div>
@@ -1464,8 +1540,38 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6.1 1.6h.1c6.9 0 12.5-5.5 12.5-12.5S22.9 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.1 1.1-4-.3-.4c-1.1-1.7-1.6-3.6-1.6-5.5C5.3 9.6 10 4.9 16 4.9s10.7 4.7 10.7 10.6S22 25.7 16 25.7zm6.1-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.8.2s-.9 1.1-1.1 1.3c-.2.2-.4.2-.7 0-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.3 2.4 3.7 5.8 5.2.8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
   </a>
 
+  <!-- COOKIE BANNER (Consent Mode v2) -->
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Aviso de cookies">
+    <div class="cookie-inner">
+      <p class="cookie-text">
+        Utilizamos cookies de Google Ads únicamente para medir la eficacia de nuestra
+        publicidad. No se activan si usted no lo acepta, y puede cambiar su elección en
+        cualquier momento desde el enlace «Cookies» del pie de página.
+        <a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Más información</a>
+      </p>
+      <div class="cookie-actions">
+        <button class="cookie-btn rechazar" id="cookie-rechazar">Rechazar</button>
+        <button class="cookie-btn aceptar" id="cookie-aceptar">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script>
+    // Banner de cookies — Consent Mode v2
+    (function(){
+      var banner = document.getElementById('cookie-banner');
+      if(!banner) return;
+      function cerrar(acepta){
+        window.cyaConsent.guardar(acepta);
+        banner.classList.remove('visible');
+      }
+      document.getElementById('cookie-aceptar').addEventListener('click', function(){ cerrar(true); });
+      document.getElementById('cookie-rechazar').addEventListener('click', function(){ cerrar(false); });
+      window.cyaCookiePrefs = function(){ banner.classList.add('visible'); };
+      if (window.cyaConsent.leer() === null) banner.classList.add('visible');
+    })();
+
     // Conversiones Google Ads por clic: teléfono y WhatsApp
     (function(){
       document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
