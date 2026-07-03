@@ -1,0 +1,8 @@
+# Notas internas — NO publicar (GitHub Pages sirve todo lo pusheado)
+CLAUDE.md
+INSTRUCCIONES_TRACKING.md
+
+# Backups locales pre-edicion
+*.bak
+*.bak-*
+*.bak_*
