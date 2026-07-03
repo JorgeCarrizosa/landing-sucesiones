@@ -7,15 +7,34 @@
 <meta name="description" content="Abogados especialistas en herencias y sucesiones en Cataluña. Carrizosa y Almazor.">
 
   <!-- ═══════════════════════════════════════════════════════════════
-       TRACKING — Google Tag Manager
-       SUSTITUIR: GTM-XXXXXXX por el ID real de tu contenedor GTM
-       Encuéntralo en: tagmanager.google.com → tu cuenta → tu contenedor
+       TRACKING — Etiqueta de Google (gtag.js) directa, sin GTM
+       Cuenta Google Ads: AW-17531743025
+       Etiquetas de conversión (Google Ads → Objetivos → Conversiones):
+         formulario → creada
+         telefono / whatsapp → PENDIENTES: crear la acción en Google Ads
+         y pegar su etiqueta en CYA_ADS.labels (vacía = no se dispara)
   ═══════════════════════════════════════════════════════════════ -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5GGMCMB4');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17531743025"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17531743025');
+
+    window.CYA_ADS = {
+      id: 'AW-17531743025',
+      labels: {
+        formulario: 'y4FCJbXs6QcELHW5KdB',
+        telefono:   '',
+        whatsapp:   ''
+      }
+    };
+    window.cyaConversion = function(tipo){
+      var etiqueta = window.CYA_ADS.labels[tipo];
+      if(!etiqueta) return;
+      gtag('event','conversion',{'send_to': window.CYA_ADS.id + '/' + etiqueta});
+    };
+  </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -898,12 +917,6 @@
 </head>
 <body>
 
-  <!-- Google Tag Manager (noscript) — SUSTITUIR GTM-XXXXXXX -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GGMCMB4"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-inner">
@@ -1452,6 +1465,15 @@
 
   <!-- SCRIPTS -->
   <script>
+    // Conversiones Google Ads por clic: teléfono y WhatsApp
+    (function(){
+      document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+        a.addEventListener('click', function(){ cyaConversion('telefono'); });
+      });
+      var wa = document.querySelector('.wa-fab');
+      if(wa) wa.addEventListener('click', function(){ cyaConversion('whatsapp'); });
+    })();
+
     // Reveal-on-scroll
     (function(){
       var els = document.querySelectorAll('.reveal, .reveal-stagger');
@@ -1549,15 +1571,7 @@
           if(data.success){
             ok.style.display = 'block';
             form.reset();
-            /* ── Disparo de conversión Google Ads ──────────────
-               SUSTITUIR:
-               - AW-XXXXXXXXXX        → tu ID de conversión
-               - XXXXXXXXXXXXXXXXXXXX → tu etiqueta de conversión
-               Encuéntralos en: Google Ads → Herramientas → Conversiones
-            ─────────────────────────────────────────────────── */
-            if(typeof gtag !== 'undefined'){
-              gtag('event','conversion',{'send_to':'AW-17531743025/y4FCJbXs6QcELHW5KdB'});
-            }
+            cyaConversion('formulario');
           } else {
             err.style.display = 'block';
           }
