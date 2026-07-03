@@ -69,7 +69,7 @@
     {
       "@type": "Question",
       "name": "¿Cuánto se paga de Impuesto de Sucesiones en Cataluña?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Cataluña aplica bonificaciones muy elevadas para descendientes, cónyuge y ascendientes (Grupos I y II), que pueden llegar al 99% para tramos bajos y reducirse en patrimonios elevados. Para hermanos y sobrinos las bonificaciones son menores. Use nuestro simulador orientativo o agende una consulta para un cálculo exacto." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Depende del parentesco: el cónyuge o pareja estable tiene una bonificación del 99% de la cuota; los hijos menores de 21 años, bonificaciones por tramos del 99% al 20%; los hijos mayores de 21 y los ascendientes, del 60% al 0% según el importe heredado; y hermanos o sobrinos no tienen bonificación. Use nuestro simulador orientativo o agende una consulta para un cálculo exacto." }
     },
     {
       "@type": "Question",
@@ -1395,27 +1395,20 @@
         </div>
 
         <div class="calc-field">
-          <label>Grupo de parentesco</label>
+          <label>Parentesco con el fallecido</label>
           <select id="kin">
-            <option value="I">Grupo I · Descendientes menores de 21 años</option>
-            <option value="II" selected>Grupo II · Cónyuge, hijos y ascendientes</option>
-            <option value="III">Grupo III · Hermanos, sobrinos, tíos</option>
-            <option value="IV">Grupo IV · Primos y otros / sin parentesco</option>
-          </select>
-        </div>
-
-        <div class="calc-field">
-          <label>Edad del heredero (si aplica)</label>
-          <select id="age">
-            <option value="adult" selected>21 años o más</option>
-            <option value="minor">Menor de 21 años</option>
+            <option value="conyuge">Cónyuge o pareja estable</option>
+            <option value="gi">Hijo o nieto menor de 21 años</option>
+            <option value="gii" selected>Hijo mayor de 21, nieto o padres</option>
+            <option value="giii">Hermanos, sobrinos, tíos</option>
+            <option value="giv">Primos y otros / sin parentesco</option>
           </select>
         </div>
 
         <div class="calc-result">
           <div class="calc-result-label">Cuota estimada · Impuesto de Sucesiones</div>
           <div class="calc-result-value" id="vResult">—</div>
-          <div class="calc-result-bonif" id="vBonif">Aplicada bonificación autonomómica de Cataluña.</div>
+          <div class="calc-result-bonif" id="vBonif">Cálculo según las tablas de bonificación vigentes en Cataluña.</div>
           <a href="#contacto" class="calc-cta">Pedir cálculo exacto</a>
         </div>
       </div>
@@ -1452,7 +1445,7 @@
         </details>
         <details class="qa">
           <summary>¿Cuánto se paga de Impuesto de Sucesiones en Cataluña?</summary>
-          <div class="answer">Cataluña aplica bonificaciones muy elevadas para descendientes, cónyuge y ascendientes (Grupos I y II), que pueden llegar al 99% para tramos bajos y reducirse en patrimonios elevados. Para hermanos y sobrinos las bonificaciones son menores. Use nuestro <a href="#calculadora">simulador orientativo</a> o agéndenos una consulta para un cálculo exacto.</div>
+          <div class="answer">Depende del parentesco: el cónyuge o pareja estable tiene una bonificación del 99% de la cuota; los hijos menores de 21 años, bonificaciones por tramos del 99% al 20%; los hijos mayores de 21 y los ascendientes, del 60% al 0% según el importe heredado; y hermanos o sobrinos no tienen bonificación (aunque sí una pequeña reducción). Use nuestro <a href="#calculadora">simulador orientativo</a> o agéndenos una consulta para un cálculo exacto.</div>
         </details>
         <details class="qa">
           <summary>¿Qué hago si hay desacuerdo entre los herederos?</summary>
@@ -1686,9 +1679,22 @@
     (function(){
       var amount = document.getElementById('amount');
       var kin = document.getElementById('kin');
-      var age = document.getElementById('age');
       if(!amount) return;
       var fmt = new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+      // Tablas de bonificación por tramos de base imponible (marginales).
+      // Fuente: DL 1/2024, texto refundido (art. 58 bis Ley 19/2010, red. Ley 5/2020).
+      var TABLA_GI  = [[100000,99],[100000,97],[100000,95],[200000,90],[250000,80],[250000,70],[500000,60],[500000,50],[500000,40],[500000,25],[Infinity,20]];
+      var TABLA_GII = [[100000,60],[100000,55],[100000,50],[200000,45],[250000,40],[250000,35],[500000,30],[500000,25],[500000,20],[500000,10],[Infinity,0]];
+      function bonifMedia(base, tabla){
+        if(base<=0) return 0;
+        var restante = base, suma = 0;
+        for(var i=0;i<tabla.length && restante>0;i++){
+          var t = Math.min(restante, tabla[i][0]);
+          suma += t * tabla[i][1];
+          restante -= t;
+        }
+        return suma / base;
+      }
       function tarifa(base){
         // Tarifa estatal aproximada (escalado simplificado)
         var tramos = [[7993,7.65],[7987,8.5],[7987,9.35],[7987,10.2],[39877,11.05],[39877,16.15],[239389,21.25],[398777,29.75]];
@@ -1705,35 +1711,22 @@
       function calc(){
         var v = +amount.value;
         var k = kin.value;
-        var a = age.value;
-        // Reducción por parentesco (simplificada)
-        var reducc = 0;
-        if(k==='I'){ reducc = 100000 + 12000; if(a==='minor') reducc += 12000; }
-        else if(k==='II'){ reducc = 100000; }
-        else if(k==='III'){ reducc = 8000; }
-        else { reducc = 0; }
+        // Reduccion por parentesco (orientativa; padres 30.000 - se afina en consulta)
+        var reducc = {conyuge:100000, gi:100000, gii:100000, giii:8000, giv:0}[k] || 0;
         var base = Math.max(0, v - reducc);
         var cuota = tarifa(base);
-        // Bonificación autonómica (Grupos I y II) escalada
         var bonifPct = 0;
-        if(k==='I' || k==='II'){
-          if(base<=100000) bonifPct = 99;
-          else if(base<=200000) bonifPct = 80;
-          else if(base<=400000) bonifPct = 60;
-          else if(base<=800000) bonifPct = 40;
-          else if(base<=1500000) bonifPct = 20;
-          else bonifPct = 10;
-        } else if(k==='III'){
-          bonifPct = 25;
-        }
+        if(k==='conyuge') bonifPct = 99;
+        else if(k==='gi') bonifPct = bonifMedia(base, TABLA_GI);
+        else if(k==='gii') bonifPct = bonifMedia(base, TABLA_GII);
         var pagar = cuota * (1 - bonifPct/100);
         document.getElementById('vAmount').textContent = fmt.format(v);
         document.getElementById('vResult').textContent = fmt.format(Math.round(pagar));
         document.getElementById('vBonif').innerHTML = bonifPct>0
-          ? 'Aplicada bonificación autonómica de Cataluña de aproximadamente <strong>'+bonifPct+'%</strong>.'
-          : 'Sin bonificación autonómica relevante para este grupo de parentesco.';
+          ? 'Bonificaci\u00f3n media aplicada: <strong>'+bonifPct.toFixed(1).replace('.',',')+'%</strong> seg\u00fan las tablas vigentes en Catalu\u00f1a.'
+          : 'Este grupo de parentesco no tiene bonificaci\u00f3n de la cuota en Catalu\u00f1a.';
       }
-      [amount,kin,age].forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
+      [amount,kin].forEach(function(el){ el.addEventListener('input', calc); el.addEventListener('change', calc); });
       calc();
     })();
 
