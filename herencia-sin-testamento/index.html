@@ -34,6 +34,18 @@
     content:counter(orden);position:absolute;left:8px;top:16px;
     font-family:"EB Garamond",serif;font-style:italic;font-size:28px;color:var(--gold);
   }
+  .socios-mini{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    max-width:760px;margin:32px 0 0;
+  }
+  .socio-mini{display:flex;gap:18px;align-items:center;background:var(--bg-2);padding:22px 24px}
+  .socio-mini img{width:64px;height:64px;object-fit:cover;object-position:top center;border:1px solid var(--line)}
+  .socio-mini .sn{font-family:"EB Garamond",serif;color:var(--ink);font-size:19px;line-height:1.15}
+  .socio-mini .sr{font-size:11.5px;color:var(--muted);letter-spacing:.06em;margin-top:4px;line-height:1.4}
+  .socios-enlace{font-size:13px;margin-top:14px}
+  .socios-enlace a{color:var(--ink);border-bottom:1px solid var(--gold)}
+  @media(max-width:680px){.socios-mini{grid-template-columns:1fr}}
   .cta-bloque{margin:56px 0 0;padding:36px 40px;background:var(--ink);color:#fff;max-width:760px}
   .cta-bloque h3{color:#fff;font-size:26px;margin-bottom:10px}
   .cta-bloque p{color:rgba(255,255,255,.8);margin-bottom:22px}
@@ -96,10 +108,13 @@
       <a href="/" class="brand">
         <div class="brand-name">
           Carrizosa y Almazor
-          <small>Abogados · Barcelona</small>
+          <small>Abogados&nbsp;&nbsp;·&nbsp;&nbsp;Barcelona</small>
         </div>
       </a>
-      <div class="nav-links" id="navLinks" style="display:flex">
+      <button class="nav-toggle" aria-label="Abrir menú" onclick="this.classList.toggle('open');document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
         <a href="/">Inicio</a>
         <a href="/#servicios">Servicios</a>
         <a href="/#calculadora">Calculadora del impuesto</a>
@@ -183,6 +198,26 @@
           <div class="answer">La declaración de herederos suele estar en unas semanas; el conjunto (inventario, partición, impuestos, Registro) habitualmente entre 6 y 12 meses. Lo que marca el ritmo es el plazo fiscal de 6 meses, que gestionamos con prioridad.</div>
         </details>
       </div>
+
+      <h2>Quién le atiende</h2>
+      <p>En este despacho no hay intermediarios: su caso lo llevan directamente los socios, desde la primera consulta hasta la última firma.</p>
+      <div class="socios-mini">
+        <div class="socio-mini">
+          <img src="/img/marisa-almazor.jpg" alt="Marisa Almazor, abogada especialista en sucesiones">
+          <div>
+            <div class="sn">Marisa Almazor</div>
+            <div class="sr">Socia directora · Especialista en sucesiones, propiedad e inmobiliario · Abogada desde 1991</div>
+          </div>
+        </div>
+        <div class="socio-mini">
+          <img src="/img/carlos-carrizosa.jpg" alt="Carlos Carrizosa, abogado y socio fundador">
+          <div>
+            <div class="sn">Carlos Carrizosa</div>
+            <div class="sr">Socio fundador · Litigación civil, penal y social · Abogado desde 1989</div>
+          </div>
+        </div>
+      </div>
+      <p class="socios-enlace"><a href="/#socios">Conozca a los socios →</a></p>
 
       <div class="cta-bloque">
         <h3>¿Ha fallecido un familiar sin testamento?</h3>
