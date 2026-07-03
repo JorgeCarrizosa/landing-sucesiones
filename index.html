@@ -1080,6 +1080,23 @@
     .footer-bottom{flex-direction:column;align-items:flex-start;text-align:left;font-size:11.5px}
     .footer-bottom .legal{flex-wrap:wrap;gap:16px}
   }
+
+  /* GUIAS Y HERRAMIENTAS (enlaces al cluster; SEO, colocado tras el contacto) */
+  .guias{background:var(--bg-2);border-top:1px solid var(--line);padding:72px 0}
+  .guias .eyebrow{margin-bottom:14px}
+  .guias h2{font-size:clamp(26px,3vw,36px);margin:0 0 36px}
+  .guias-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .guia-link{background:var(--bg);padding:26px 26px 24px;text-decoration:none;display:block;transition:background .15s}
+  .guia-link:hover{background:#fff}
+  .guia-link .gt{font-family:"EB Garamond",serif;color:var(--ink);font-size:19px;line-height:1.3;margin-bottom:6px}
+  .guia-link .gd{font-size:13px;line-height:1.55;color:var(--muted)}
+  .guia-link .gt::after{content:" \2192";color:var(--gold)}
+  .guia-link.destacada{background:var(--ink-2)}
+  .guia-link.destacada .gt{color:#fff}
+  .guia-link.destacada .gd{color:#b6b4c6}
+  .guia-link.destacada:hover{background:var(--ink)}
+  @media(max-width:980px){.guias-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){.guias{padding:52px 0}.guias-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1563,6 +1580,45 @@
           Oops, algo ha salido mal. Por favor, inténtelo más tarde o llámenos al +34 934 572 123.
         </p>
       </form>
+    </div>
+  </section>
+
+
+  <!-- GUIAS Y HERRAMIENTAS (cluster SEO) -->
+  <section class="guias" id="guias">
+    <div class="container">
+      <span class="eyebrow">Guías y herramientas gratuitas</span>
+      <h2>Resuelva sus dudas antes de la consulta</h2>
+      <div class="guias-grid">
+        <a class="guia-link destacada" href="/guia-herencias-cataluna/">
+          <div class="gt">Guía completa de la herencia en Cataluña</div>
+          <div class="gd">Los ocho pasos, los plazos y los costes de todo el proceso, explicados en orden.</div>
+        </a>
+        <a class="guia-link" href="/herencia-sin-testamento/">
+          <div class="gt">Herencia sin testamento</div>
+          <div class="gd">Quién hereda según el orden legal catalán y cómo se tramita la declaración de herederos.</div>
+        </a>
+        <a class="guia-link" href="/impugnar-testamento/">
+          <div class="gt">Impugnar un testamento</div>
+          <div class="gd">Nulidad, reclamación de legítima y desheredación injusta: cuándo hay caso.</div>
+        </a>
+        <a class="guia-link" href="/impuesto-de-sucesiones/">
+          <div class="gt">Impuesto de Sucesiones</div>
+          <div class="gd">Calculadora, tablas de bonificación vigentes y los plazos que no conviene pasar.</div>
+        </a>
+        <a class="guia-link" href="/herencia-con-deudas/">
+          <div class="gt">Herencia con deudas</div>
+          <div class="gd">Antes de renunciar: el beneficio de inventario catalán y sus 6 meses de plazo.</div>
+        </a>
+        <a class="guia-link" href="/calculadora-legitima/">
+          <div class="gt">Calculadora de legítima</div>
+          <div class="gd">Estime en un minuto cuánto le corresponde aunque el testamento le deje fuera.</div>
+        </a>
+        <a class="guia-link" href="/documentos-herencia/">
+          <div class="gt">Checklist de documentos</div>
+          <div class="gd">Responda seis preguntas y obtenga la lista de papeles exacta para su caso.</div>
+        </a>
+      </div>
     </div>
   </section>
 
