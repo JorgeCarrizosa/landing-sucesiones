@@ -10,9 +10,10 @@
        TRACKING — Etiqueta de Google (gtag.js) directa, sin GTM
        Cuenta Google Ads: AW-17531743025
        Etiquetas de conversión (Google Ads → Objetivos → Conversiones):
-         formulario → creada
-         telefono / whatsapp → PENDIENTES: crear la acción en Google Ads
-         y pegar su etiqueta en CYA_ADS.labels (vacía = no se dispara)
+         formulario → "Envío de formulario para clientes potenciales"
+         telefono   → "Clic teléfono landing"
+         whatsapp   → "Clic WhatsApp landing"
+       (etiqueta vacía en CYA_ADS.labels = esa conversión no se dispara)
   ═══════════════════════════════════════════════════════════════ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17531743025"></script>
   <script>
@@ -25,8 +26,8 @@
       id: 'AW-17531743025',
       labels: {
         formulario: '-y4FCJbXs6QcELHW5KdB',
-        telefono:   '',
-        whatsapp:   ''
+        telefono:   'fgGVCOjVicocELHW5KdB',
+        whatsapp:   'cpHyCOvVicocELHW5KdB'
       }
     };
     window.cyaConversion = function(tipo){
