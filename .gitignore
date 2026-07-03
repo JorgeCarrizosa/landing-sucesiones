@@ -6,3 +6,7 @@ INSTRUCCIONES_TRACKING.md
 *.bak
 *.bak-*
 *.bak_*
+
+# Diseños de Claude Design pendientes de fusionar — NO publicar tal cual
+Dise*os Claude Design/
+_disenos/

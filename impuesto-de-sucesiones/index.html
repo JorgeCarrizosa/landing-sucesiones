@@ -308,8 +308,9 @@
         return suma / base;
       }
       function tarifa(base){
-        var tramos = [[7993,7.65],[7987,8.5],[7987,9.35],[7987,10.2],[39877,11.05],[39877,16.15],[239389,21.25],[398777,29.75]];
-        var tipoFinal = 34;
+        // Tarifa propia de Cataluna, art. 57 Ley 19/2010 (7-32% en 5 tramos)
+        var tramos = [[50000,7],[100000,11],[250000,17],[400000,24]];
+        var tipoFinal = 32;
         var c = 0, restante = base;
         for(var i=0;i<tramos.length && restante>0;i++){
           var t = Math.min(restante, tramos[i][0]);
@@ -324,7 +325,9 @@
         var k = kin.value;
         var reducc = {conyuge:100000, gi:100000, gii:100000, giii:8000, giv:0}[k] || 0;
         var base = Math.max(0, v - reducc);
-        var cuota = tarifa(base);
+        // Coeficiente multiplicador art. 58 Ley 19/2010 (patrimonio preexistente < 500.000)
+        var coef = {giii:1.5882, giv:2}[k] || 1;
+        var cuota = tarifa(base) * coef;
         var bonifPct = 0;
         if(k==='conyuge') bonifPct = 99;
         else if(k==='gi') bonifPct = bonifMedia(base, TABLA_GI);
