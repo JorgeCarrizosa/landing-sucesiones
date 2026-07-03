@@ -698,7 +698,7 @@
     display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;
     padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.12);
   }
-  .footer-brand .brand-name{color:#fff;font-size:34px;line-height:1}
+  .footer-brand .brand-name{color:#fff;font-size:34px;line-height:1.15;white-space:normal}
   .footer-brand .brand-name small{color:rgba(255,255,255,.5);margin-left:14px}
   .footer-brand .crest{border-color:rgba(255,255,255,.5);color:#fff}
   .footer-brand .crest::before,.footer-brand .crest::after{background:rgba(255,255,255,.5)}
