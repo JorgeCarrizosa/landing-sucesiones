@@ -88,6 +88,8 @@ nav.main{position:sticky;top:0;z-index:50;background:var(--tinta);border-bottom:
 
 /* GUIDE LAYOUT */
 .guide{display:grid; grid-template-columns:260px 1fr; gap:56px; padding:48px 0 0; align-items:start;}
+.guide > *{min-width:0;}
+.guide-body .tbl-wrap{max-width:100%;}
 .toc{position:sticky; top:140px;}
 .toc .eyebrow{display:block; margin-bottom:16px;}
 .toc ol{list-style:none; counter-reset:toc; padding:0; margin:0;}
