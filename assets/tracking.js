@@ -65,7 +65,27 @@ window.cyaConsent = {
 })();
 
 document.addEventListener('DOMContentLoaded', function(){
-  // Banner de cookies (mismo markup y clases que index.html; estilos en estilo.css)
+  // Estilos del banner autocontenidos: las guias interiores llevan su CSS inline
+  // y no cargan estilo.css, asi que sin esto el banner sale sin estilo y el
+  // Aceptar/Rechazar no lo oculta (quitar .visible no hace nada sin display:none).
+  if (!document.getElementById('cya-cookie-css')) {
+    var css = document.createElement('style');
+    css.id = 'cya-cookie-css';
+    css.textContent =
+      '.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--ink,#1c1c24);color:#fff;padding:20px 32px;display:none;box-shadow:0 -6px 24px rgba(0,0,0,.18);font-family:"Montserrat",-apple-system,Helvetica,Arial,sans-serif}' +
+      '.cookie-banner.visible{display:block}' +
+      '.cookie-inner{max-width:1240px;margin:0 auto;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap}' +
+      '.cookie-text{font-size:13px;line-height:1.6;color:rgba(255,255,255,.85);max-width:760px;min-width:260px;flex:1;margin:0}' +
+      '.cookie-text a{color:#c9a35a;text-decoration:underline}' +
+      '.cookie-actions{display:flex;gap:12px;flex-shrink:0}' +
+      '.cookie-btn{padding:13px 24px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:opacity .2s;border:1px solid rgba(255,255,255,.6);font-family:inherit}' +
+      '.cookie-btn:hover{opacity:.85}' +
+      '.cookie-btn.aceptar{background:#c9a35a;border-color:#c9a35a;color:#040465}' +
+      '.cookie-btn.rechazar{background:transparent;color:#fff}' +
+      '@media(max-width:680px){.cookie-banner{padding:16px 22px}.cookie-inner{gap:14px}.cookie-actions{width:100%}.cookie-btn{flex:1;text-align:center;padding:14px 10px}}';
+    document.head.appendChild(css);
+  }
+  // Banner de cookies (mismo markup y clases que index.html)
   var banner = document.getElementById('cookie-banner');
   if (!banner) {
     banner = document.createElement('div');
