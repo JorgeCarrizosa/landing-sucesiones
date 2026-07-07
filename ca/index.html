@@ -209,7 +209,7 @@
           <a href="#contacte" class="calc-cta">Demanar càlcul exacte</a>
         </div>
       </div>
-      <div class="fuente">Càlcul estimatiu · Assumeix la reducció de 100.000 € del fill; per a néts (50.000 €) o pares (30.000 €), també del Grup II, la reducció és menor. No substitueix l'assessorament jurídic personalitzat.</div>
+      <div class="fuente">Càlcul estimatiu · Assumeix la reducció de 100.000 € del fill; per a néts (50.000 €) o pares (30.000 €), també del Grup II, la reducció és menor. Tampoc suma l'aixovar domèstic (3%) ni el mínim ampliat dels menors de 21 anys. No substitueix l'assessorament jurídic personalitzat.</div>
 
       <h2 id="faq">Preguntes freqüents</h2>
       <div class="faq-list" style="margin:0;max-width:760px">
@@ -361,7 +361,7 @@
         var k = kin.value;
         var reducc = {conyuge:100000, gi:100000, gii:100000, giii:8000, giv:0}[k] || 0;
         var base = Math.max(0, v - reducc);
-        // Coeficient multiplicador art. 58 Llei 19/2010 (patrimoni preexistent < 500.000)
+        // Coeficient multiplicador art. 58 del text refós DL 1/2024 (patrimoni preexistent < 500.000)
         var coef = {giii:1.5882, giv:2}[k] || 1;
         var cuota = tarifa(base) * coef;
         var bonifPct = 0;

@@ -1402,7 +1402,7 @@
         <span class="eyebrow">Impuesto de Sucesiones</span>
         <h2>Calcule, de forma orientativa, <em>lo que pagaría en Cataluña.</em></h2>
         <p>Una primera estimación basada en las bonificaciones del Impuesto de Sucesiones de Cataluña por grupo de parentesco. La cifra real depende del patrimonio preexistente, las reducciones aplicables y la naturaleza de los bienes.</p>
-        <div class="calc-disclaimer">Cálculo estimativo · Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. No sustituye al asesoramiento jurídico personalizado. Para un cálculo exacto, agende una consulta gratuita.</div>
+        <div class="calc-disclaimer">Cálculo estimativo · Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. Tampoco suma el ajuar doméstico (3%) ni el mínimo ampliado de los menores de 21 años. No sustituye al asesoramiento jurídico personalizado. Para un cálculo exacto, agende una consulta gratuita.</div>
       </div>
 
       <div class="calc-card">
@@ -1772,7 +1772,7 @@
         // Reduccion por parentesco (orientativa; padres 30.000 - se afina en consulta)
         var reducc = {conyuge:100000, gi:100000, gii:100000, giii:8000, giv:0}[k] || 0;
         var base = Math.max(0, v - reducc);
-        // Coeficiente multiplicador art. 58 Ley 19/2010 (patrimonio preexistente < 500.000)
+        // Coeficiente multiplicador art. 58 del texto refundido DL 1/2024 (patrimonio preexistente < 500.000)
         var coef = {giii:1.5882, giv:2}[k] || 1;
         var cuota = tarifa(base) * coef;
         var bonifPct = 0;

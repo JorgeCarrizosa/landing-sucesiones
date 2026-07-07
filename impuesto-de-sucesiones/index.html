@@ -315,7 +315,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
           <a href="https://sucesiones.carrizosayalmazor.com/#contacto">Pedir cálculo exacto</a>
         </div>
       </div>
-      <p class="calc-fine">Cálculo estimativo: no incluye el patrimonio preexistente, la reducción por vivienda habitual ni otras reducciones específicas. Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. Para un cálculo exacto, primera consulta gratuita.</p>
+      <p class="calc-fine">Cálculo estimativo: no incluye el patrimonio preexistente, la reducción por vivienda habitual ni otras reducciones específicas. Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. Tampoco suma el ajuar doméstico (un 3% que se añade a la base) ni el mínimo ampliado de los menores de 21 años (100.000 € más 12.000 € por año hasta los 21, máximo 196.000 €). Para un cálculo exacto, primera consulta gratuita.</p>
     </div>
   </section>
 
@@ -330,6 +330,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
         <li><strong>Hijos mayores de 21, nietos y padres (Grupo II):</strong> bonificación por tramos, del 60% al 0%.</li>
         <li><strong>Hermanos, sobrinos y tíos (Grupo III):</strong> sin bonificación (solo una reducción de 8.000 € en la base).</li>
       </ul>
+      <p>Desde 2025 (Decreto ley 5/2025) existe además una bonificación del 99% para los descendientes y ascendientes de una persona fallecida a causa de violencia machista.</p>
     </div></div>
   </section>
 
@@ -492,7 +493,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
       case 'conyuge': red=100000; bon=0.99; break;
       case 'gi': red=100000; break;
       case 'gii': red=100000; break;
-      // Coeficiente multiplicador art. 58 Ley 19/2010 (patrimonio preexistente < 500.000)
+      // Coeficiente multiplicador art. 58 del texto refundido DL 1/2024 (patrimonio preexistente < 500.000)
       case 'giii': red=8000; coef=1.5882; break;
       case 'giv': red=0; coef=2; break;
     }
