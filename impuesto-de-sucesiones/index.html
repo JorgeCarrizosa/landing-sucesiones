@@ -302,7 +302,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
           <select id="kin">
             <option value="conyuge">Cónyuge o pareja estable</option>
             <option value="gi">Hijo o nieto menor de 21 años</option>
-            <option value="gii" selected>Hijo mayor de 21, nieto o padres</option>
+            <option value="gii" selected>Hijo mayor de 21 años (Grupo II)</option>
             <option value="giii">Hermanos, sobrinos, tíos</option>
             <option value="giv">Primos y otros / sin parentesco</option>
           </select>
@@ -315,7 +315,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
           <a href="https://sucesiones.carrizosayalmazor.com/#contacto">Pedir cálculo exacto</a>
         </div>
       </div>
-      <p class="calc-fine">Cálculo estimativo: no incluye el patrimonio preexistente, la reducción por vivienda habitual ni otras reducciones específicas. Para un cálculo exacto, primera consulta gratuita.</p>
+      <p class="calc-fine">Cálculo estimativo: no incluye el patrimonio preexistente, la reducción por vivienda habitual ni otras reducciones específicas. Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. Para un cálculo exacto, primera consulta gratuita.</p>
     </div>
   </section>
 
@@ -323,7 +323,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
   <section class="sec numbered">
     <div class="wrap"><div class="inner">
       <h2>Las bonificaciones vigentes, sin letra pequeña</h2>
-      <p>Desde la reforma de 2020 (hoy recogida en el texto refundido aprobado por el Decreto legislativo 1/2024) hay <em>tres regímenes distintos</em>:</p>
+      <p>Desde la reforma de 2020 (hoy recogida en el texto refundido aprobado por el Decreto legislativo 1/2024) hay <em>tres regímenes de bonificación</em> (más el Grupo III, que no tiene ninguna):</p>
       <ul class="chk">
         <li><strong>Cónyuge o pareja estable: bonificación fija del 99%</strong> de la cuota.</li>
         <li><strong>Hijos y nietos menores de 21 años (Grupo I):</strong> bonificación por tramos, del 99% al 20%.</li>
@@ -370,7 +370,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
     <div class="wrap"><div class="inner">
       <h2>Las reducciones principales</h2>
       <ul class="chk">
-        <li><strong>Por parentesco:</strong> 100.000 € para cónyuge e hijos (los menores de 21 años suman más por cada año hasta la mayoría), 50.000 € para otros descendientes, 30.000 € para ascendientes y 8.000 € para el Grupo III.</li>
+        <li><strong>Por parentesco:</strong> 100.000 € para cónyuge e hijos (los menores de 21 años suman 12.000 € por cada año que les falte hasta los 21, con un máximo de 196.000 €), 50.000 € para otros descendientes, 30.000 € para ascendientes y 8.000 € para el Grupo III.</li>
         <li><strong>Vivienda habitual del fallecido:</strong> reducción del 95% de su valor (con límite legal), si se mantiene el inmueble durante los años que exige la norma.</li>
         <li><strong>Otras:</strong> discapacidad, personas mayores, seguros de vida, empresa familiar — cada una con requisitos propios y, algunas, incompatibles con la bonificación.</li>
       </ul>
@@ -498,8 +498,9 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
     }
     var base=Math.max(0,a-red);
     var cuota=tax(base)*coef;
-    if(kin.value==='gi') bon=avgBon(base,GI);
-    if(kin.value==='gii') bon=avgBon(base,GII);
+    // Bonificacion: porcentaje medio ponderado por tramos de BASE IMPONIBLE (a), no de base liquidable (art. 58 bis.2)
+    if(kin.value==='gi') bon=avgBon(a,GI);
+    if(kin.value==='gii') bon=avgBon(a,GII);
     var pay=cuota*(1-bon);
     vResult.textContent=eur(pay);
     if(vBonif) vBonif.textContent = bon>0 ? ('Bonificación aplicada · '+Math.round(bon*100)+'%') : 'Sin bonificación';

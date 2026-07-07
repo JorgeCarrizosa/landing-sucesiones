@@ -304,7 +304,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
             <input type="number" id="legDonaciones" min="0" step="1000" value="0">
           </div>
           <div class="field">
-            <label class="fl" for="legHijos">Número de hijos del fallecido (vivos o con descendencia)</label>
+            <label class="fl" for="legHijos">Número de hijos que cuentan para el reparto (también los que renunciaron, fueron desheredados con causa o declarados indignos; los premuertos solo si dejan descendencia)</label>
             <input type="number" id="legHijos" min="1" step="1" value="2">
           </div>
           <div class="field">
@@ -313,14 +313,14 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
           </div>
         </div>
         <div class="result">
-          <div class="rlab">Su legítima individual estimada</div>
+          <div class="rlab">Lo que podría reclamar (estimación)</div>
           <div id="legResult">—</div>
           <div class="breakdown" id="legBreak"></div>
           <p class="rnote">La legítima global es la cuarta parte de la base de cálculo.</p>
           <a href="https://sucesiones.carrizosayalmazor.com/#contacto">Pedir cálculo exacto</a>
         </div>
       </div>
-      <p class="calc-fine">Cálculo estimativo. El cómputo real exige valorar los bienes a fecha de defunción, identificar qué donaciones son computables y qué atribuciones son imputables — es exactamente el trabajo pericial y jurídico de la reclamación.</p>
+      <p class="calc-fine">Cálculo estimativo. El cómputo real exige valorar los bienes a fecha de defunción, identificar qué donaciones son computables y qué atribuciones son imputables — es exactamente el trabajo pericial y jurídico de la reclamación. Nota: las donaciones hechas a un legitimario e imputables a su legítima se computan aunque sean anteriores a esos 10 años (art. 451-5 CCCat).</p>
     </div>
   </section>
 
@@ -334,7 +334,7 @@ footer .foot-links{margin-left:auto; display:flex; gap:22px;}
         <div class="row"><div class="n">2</div><div class="t">− deudas de la herencia y gastos de última enfermedad y entierro</div></div>
         <div class="row"><div class="n">3</div><div class="t">+ donaciones hechas por el fallecido en los <strong>10 años</strong> anteriores a la muerte (salvo liberalidades de uso)</div></div>
         <div class="row"><div class="n">4</div><div class="t">= base de cálculo → <strong>la legítima global es la cuarta parte (¼)</strong></div></div>
-        <div class="row"><div class="n">5</div><div class="t">÷ número de hijos (los fallecidos con descendencia cuentan por estirpe) = <strong>legítima individual</strong></div></div>
+        <div class="row"><div class="n">5</div><div class="t">÷ número de legitimarios que cuentan — también hacen número los que renunciaron, fueron desheredados con causa o declarados indignos, aunque no cobren (art. 451-6); los premuertos solo si dejan descendencia — = <strong>legítima individual</strong></div></div>
         <div class="row"><div class="n">6</div><div class="t">− lo ya recibido imputable (donaciones al legitimario, legados en pago de legítima) = <strong>lo reclamable</strong></div></div>
       </div>
       <p class="source">Fuente: Ley 10/2008, del libro cuarto del Código Civil de Cataluña, arts. 451-1 a 451-27 (cuantía y cómputo: art. 451-5; prescripción: art. 451-27).</p>

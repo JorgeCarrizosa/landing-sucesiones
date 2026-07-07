@@ -1402,7 +1402,7 @@
         <span class="eyebrow">Impuesto de Sucesiones</span>
         <h2>Calcule, de forma orientativa, <em>lo que pagaría en Cataluña.</em></h2>
         <p>Una primera estimación basada en las bonificaciones del Impuesto de Sucesiones de Cataluña por grupo de parentesco. La cifra real depende del patrimonio preexistente, las reducciones aplicables y la naturaleza de los bienes.</p>
-        <div class="calc-disclaimer">Cálculo estimativo · No sustituye al asesoramiento jurídico personalizado. Para un cálculo exacto, agende una consulta gratuita.</div>
+        <div class="calc-disclaimer">Cálculo estimativo · Asume la reducción de 100.000 € del hijo; para nietos (50.000 €) o padres (30.000 €), también del Grupo II, la reducción es menor. No sustituye al asesoramiento jurídico personalizado. Para un cálculo exacto, agende una consulta gratuita.</div>
       </div>
 
       <div class="calc-card">
@@ -1418,7 +1418,7 @@
           <select id="kin">
             <option value="conyuge">Cónyuge o pareja estable</option>
             <option value="gi">Hijo o nieto menor de 21 años</option>
-            <option value="gii" selected>Hijo mayor de 21, nieto o padres</option>
+            <option value="gii" selected>Hijo mayor de 21 años (Grupo II)</option>
             <option value="giii">Hermanos, sobrinos, tíos</option>
             <option value="giv">Primos y otros / sin parentesco</option>
           </select>
@@ -1777,8 +1777,9 @@
         var cuota = tarifa(base) * coef;
         var bonifPct = 0;
         if(k==='conyuge') bonifPct = 99;
-        else if(k==='gi') bonifPct = bonifMedia(base, TABLA_GI);
-        else if(k==='gii') bonifPct = bonifMedia(base, TABLA_GII);
+        // Bonificacion: porcentaje medio ponderado por tramos de BASE IMPONIBLE (v), no de base liquidable (art. 58 bis.2)
+        else if(k==='gi') bonifPct = bonifMedia(v, TABLA_GI);
+        else if(k==='gii') bonifPct = bonifMedia(v, TABLA_GII);
         var pagar = cuota * (1 - bonifPct/100);
         document.getElementById('vAmount').textContent = fmt.format(v);
         document.getElementById('vResult').textContent = fmt.format(Math.round(pagar));

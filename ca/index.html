@@ -197,7 +197,7 @@
           <select id="kin">
             <option value="conyuge">Cònjuge o parella estable</option>
             <option value="gi">Fill o nét menor de 21 anys</option>
-            <option value="gii" selected>Fill major de 21, nét o pares</option>
+            <option value="gii" selected>Fill major de 21 anys (Grup II)</option>
             <option value="giii">Germans, nebots, oncles</option>
             <option value="giv">Cosins i altres / sense parentiu</option>
           </select>
@@ -209,7 +209,7 @@
           <a href="#contacte" class="calc-cta">Demanar càlcul exacte</a>
         </div>
       </div>
-      <div class="fuente">Càlcul estimatiu · No substitueix l'assessorament jurídic personalitzat.</div>
+      <div class="fuente">Càlcul estimatiu · Assumeix la reducció de 100.000 € del fill; per a néts (50.000 €) o pares (30.000 €), també del Grup II, la reducció és menor. No substitueix l'assessorament jurídic personalitzat.</div>
 
       <h2 id="faq">Preguntes freqüents</h2>
       <div class="faq-list" style="margin:0;max-width:760px">
@@ -366,8 +366,9 @@
         var cuota = tarifa(base) * coef;
         var bonifPct = 0;
         if(k==='conyuge') bonifPct = 99;
-        else if(k==='gi') bonifPct = bonifMedia(base, TABLA_GI);
-        else if(k==='gii') bonifPct = bonifMedia(base, TABLA_GII);
+        // Bonificacio: percentatge mitja ponderat per trams de BASE IMPOSABLE (v), no de base liquidable (art. 58 bis.2)
+        else if(k==='gi') bonifPct = bonifMedia(v, TABLA_GI);
+        else if(k==='gii') bonifPct = bonifMedia(v, TABLA_GII);
         var pagar = cuota * (1 - bonifPct/100);
         document.getElementById('vAmount').textContent = fmt.format(v);
         document.getElementById('vResult').textContent = fmt.format(Math.round(pagar));
