@@ -82,7 +82,11 @@ document.addEventListener('DOMContentLoaded', function(){
       '.cookie-btn:hover{opacity:.85}' +
       '.cookie-btn.aceptar{background:#c9a35a;border-color:#c9a35a;color:#040465}' +
       '.cookie-btn.rechazar{background:transparent;color:#fff}' +
-      '@media(max-width:680px){.cookie-banner{padding:16px 22px}.cookie-inner{gap:14px}.cookie-actions{width:100%}.cookie-btn{flex:1;text-align:center;padding:14px 10px}}';
+      '@media(max-width:680px){.cookie-banner{padding:16px 22px}.cookie-inner{gap:14px}.cookie-actions{width:100%}.cookie-btn{flex:1;text-align:center;padding:14px 10px}}' +
+      /* Con el banner abierto (z-index 100 > 90), el FAB de WhatsApp quedaba tapado
+         justo en la primera visita — la del clic de Ads. Se eleva mientras dure. */
+      'body.cookie-abierta .wa-fab{bottom:130px}' +
+      '@media(max-width:680px){body.cookie-abierta .wa-fab{bottom:205px}}';
     document.head.appendChild(css);
   }
   // Banner de cookies (mismo markup y clases que index.html)
@@ -97,21 +101,26 @@ document.addEventListener('DOMContentLoaded', function(){
       '<div class="cookie-inner">' +
       '<p class="cookie-text">Utilizamos cookies de Google Ads únicamente para medir la eficacia de nuestra publicidad. ' +
       'No se activan si usted no lo acepta, y puede cambiar su elección en cualquier momento desde el enlace «Cookies» del pie de página. ' +
-      '<a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Más información</a></p>' +
+      '<a href="https://www.carrizosayalmazor.com/privacidad.html" target="_blank" rel="noopener">Más información</a></p>' +
       '<div class="cookie-actions">' +
       '<button class="cookie-btn rechazar" id="cookie-rechazar">Rechazar</button>' +
       '<button class="cookie-btn aceptar" id="cookie-aceptar">Aceptar</button>' +
       '</div></div>';
     document.body.appendChild(banner);
   }
+  function abrir(){
+    banner.classList.add('visible');
+    document.body.classList.add('cookie-abierta');
+  }
   function cerrar(acepta){
     window.cyaConsent.guardar(acepta);
     banner.classList.remove('visible');
+    document.body.classList.remove('cookie-abierta');
   }
   document.getElementById('cookie-aceptar').addEventListener('click', function(){ cerrar(true); });
   document.getElementById('cookie-rechazar').addEventListener('click', function(){ cerrar(false); });
-  window.cyaCookiePrefs = function(){ banner.classList.add('visible'); };
-  if (window.cyaConsent.leer() === null) banner.classList.add('visible');
+  window.cyaCookiePrefs = abrir;
+  if (window.cyaConsent.leer() === null) abrir();
 
   // Conversiones por clic: teléfono y WhatsApp
   document.querySelectorAll('a[href^="tel:"]').forEach(function(a){

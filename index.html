@@ -29,7 +29,7 @@
   "email": "abogados@carrizosayalmazor.com",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Calle Pau Claris 171",
+    "streetAddress": "Calle Pau Claris 171, Entresuelo 2ª",
     "postalCode": "08037",
     "addressLocality": "Barcelona",
     "addressRegion": "Cataluña",
@@ -51,7 +51,7 @@
     {
       "@type": "Question",
       "name": "¿Qué documentación necesito para iniciar una herencia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Certificado de defunción, certificado de Últimas Voluntades, copia del testamento (si existe), DNI del fallecido y de los herederos, escrituras de inmuebles, certificados bancarios de saldos a fecha de fallecimiento, pólizas de seguros de vida y documentación de vehículos. Le entregaremos un listado personalizado en la primera consulta." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Certificado de defunción, certificado de Últimas Voluntades, copia del testamento (si existe), DNI del fallecido y de los herederos, escrituras de inmuebles, certificados bancarios de saldos a fecha de fallecimiento, pólizas de seguros de vida y documentación de vehículos. Le entregaremos un listado personalizado en la primera consulta; también puede adelantar trabajo con nuestro checklist de documentos." }
     },
     {
       "@type": "Question",
@@ -76,12 +76,12 @@
     {
       "@type": "Question",
       "name": "¿Qué hago si hay desacuerdo entre los herederos?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Primero intentamos siempre la negociación y la mediación: el 98% de los conflictos se resuelven sin acudir a tribunales y a un coste mucho menor. Si no es posible, defendemos sus derechos por vía judicial: impugnación de testamento, acción de petición de herencia, acción de partición o reclamación de legítima." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Primero intentamos siempre la negociación y la mediación: la mayoría de los conflictos se resuelven sin acudir a tribunales y a un coste mucho menor. Si no es posible, defendemos sus derechos por vía judicial: impugnación de testamento, acción de petición de herencia, acción de partición o reclamación de legítima." }
     },
     {
       "@type": "Question",
       "name": "¿Cuánto cuestan sus servicios?",
-      "acceptedAnswer": { "@type": "Answer", "text": "La primera consulta es siempre gratuita y sin compromiso. Tras analizar su caso le presentamos un presupuesto cerrado por escrito, sin sorpresas posteriores. Trabajamos con honorarios fijos por fases o con porcentaje sobre el caudal hereditario, según convenga al cliente." }
+      "acceptedAnswer": { "@type": "Answer", "text": "La primera consulta es siempre gratuita y sin compromiso. Tras analizar su caso le presentamos un presupuesto cerrado por escrito, sin sorpresas posteriores. Trabajamos con honorarios fijos por fases o con porcentaje sobre el caudal hereditario." }
     }
   ]
 }
@@ -328,6 +328,16 @@
     letter-spacing:0.14em;text-transform:uppercase;
     font-weight:600;border-bottom:1px solid var(--ink);
     display:inline-flex;align-items:center;gap:10px;
+  }
+  /* Botón de llamada: solo en móvil (82% del tráfico; el público 55+ llama).
+     En escritorio el teléfono ya está en la topbar. */
+  .btn-call{display:none;background:var(--gold)}
+  .btn-call:hover{background:#93743a}
+  .hero-plazo{
+    font-size:13px;color:var(--muted);line-height:1.6;
+    border-left:2px solid var(--gold);
+    padding:4px 0 4px 14px;
+    margin:-24px 0 44px;max-width:520px;
   }
   .hero-meta{
     display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
@@ -760,6 +770,10 @@
     border:6px solid transparent;border-left-color:var(--ink);
   }
   .wa-fab:hover .wa-tooltip{opacity:1}
+  /* Con el banner de cookies abierto (z-index 100 > 90), el FAB quedaba tapado
+     justo en la primera visita — la del clic de Ads. Se eleva mientras dure. */
+  body.cookie-abierta .wa-fab{bottom:130px}
+  @media(max-width:680px){body.cookie-abierta .wa-fab{bottom:205px}}
 
   /* CONTACT */
   section.contact{
@@ -1010,6 +1024,9 @@
       padding:18px 24px;font-size:12px;
     }
     .btn-secondary{padding:14px 4px}
+    .btn-call{display:inline-flex}
+    .hero-plazo{margin:-16px 0 36px;font-size:12.5px}
+    .topbar-left span:first-child a{font-weight:600}
     .hero-meta{
       grid-template-columns:repeat(3,1fr);gap:12px;
       padding-top:24px;
@@ -1105,8 +1122,8 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="topbar-left">
-        <span>📍 Calle Pau Claris 171, 08037 Barcelona</span>
-        <span>☎ +34 934 572 123</span>
+        <span>☎ <a href="tel:934572123">+34 934 572 123</a></span>
+        <span>📍 Calle Pau Claris 171, Entresuelo 2ª · 08037 Barcelona</span>
         <span>Primera consulta gratuita</span>
       </div>
       <div class="topbar-right">
@@ -1146,15 +1163,17 @@
         <span class="eyebrow">Derecho de Sucesiones · Cataluña</span>
         <h1>Especialistas en herencias, conflictos entre herederos y <em>sucesiones complejas.</em></h1>
         <p class="hero-lede">
-          Le acompañamos en todo el proceso de la herencia. Desde la lectura a la elaboración del testamento hasta el reparto de bienes y el pago de impuestos.
+          Le acompañamos en todo el proceso de la herencia: desde el testamento hasta el reparto de bienes y el pago de impuestos.
         </p>
         <div class="hero-cta-row">
           <a href="#contacto" class="btn-primary">Primera consulta gratuita</a>
+          <a href="tel:934572123" class="btn-primary btn-call">Llamar ahora · 93 457 21 23</a>
           <a href="#servicios" class="btn-secondary">Áreas de práctica</a>
         </div>
+        <p class="hero-plazo">El Impuesto de Sucesiones se liquida en un plazo de 6 meses desde el fallecimiento. Cuanto antes revisemos su caso, más margen tendremos.</p>
         <div class="hero-meta">
           <div><strong>1989</strong><span>ejercicio desde</span></div>
-          <div><strong>Civil</strong><span>penal · social</span></div>
+          <div><strong>Socios</strong><span>atención directa</span></div>
           <div><strong>BCN</strong><span>Pau Claris 171</span></div>
         </div>
       </div>
@@ -1190,7 +1209,7 @@
       <span class="eyebrow" style="justify-content:center">El despacho</span>
       <h2>Acompañamos a las familias en el momento más delicado: <em>el de heredar.</em></h2>
       <p>
-        Carrizosa y Almazor es un despacho de abogados con sede en Barcelona, especializado en derecho civil catalán y, de forma muy particular, en sucesiones. Atendemos cada expediente con discreción, criterio jurídico y vocación de resolverlo — dentro o fuera de los tribunales.
+        Carrizosa y Almazor es un despacho de abogados con sede en Barcelona, especializado en derecho civil común y catalán y, de forma muy particular, en sucesiones. Atendemos cada expediente con discreción, criterio jurídico y vocación de resolverlo, dentro o fuera de los tribunales.
       </p>
     </div>
   </section>
@@ -1204,7 +1223,7 @@
           <h2 style="margin-top:24px">Cuatro áreas, <em>una misma mesa.</em></h2>
         </div>
         <p>
-          Trabajamos cada herencia de principio a fin: planificación en vida, tramitación, fiscalidad y, cuando aparece el desacuerdo, defensa de sus derechos. Un único equipo coordina todas las fases sin trasvasar el caso.
+          Trabajamos cada herencia de principio a fin: planificación en vida, tramitación, fiscalidad y, cuando aparece el desacuerdo, defensa de sus derechos. Un único equipo coordina todas las fases del expediente.
         </p>
       </div>
 
@@ -1227,7 +1246,7 @@
           <ul>
             <li>Revisión de testamento y documentación de la herencia.</li>
             <li>Cálculo de lo que corresponde a cada heredero.</li>
-            <li>Redacción y firma de cuadernos particionales y escrituras.</li>
+            <li>Redacción y firma de las escrituras de aceptación y adjudicación de la herencia.</li>
           </ul>
           <a href="#contacto" class="service-link">Solicitar consulta</a>
         </div>
@@ -1267,7 +1286,7 @@
           <h2 style="margin-top:24px">Dos abogados al frente <em>de cada caso.</em></h2>
         </div>
         <p>
-          En Carrizosa y Almazor cada cliente es atendido directamente por uno de los socios — desde la primera consulta hasta la última firma. Trato cercano, dedicación personal y criterio jurídico contrastado en cada expediente.
+          En Carrizosa y Almazor cada cliente es atendido directamente por uno de los socios, desde la primera consulta hasta la última firma. Trato cercano, dedicación personal y criterio jurídico contrastado en cada expediente.
         </p>
       </div>
 
@@ -1279,7 +1298,7 @@
         <div class="partner-info">
           <span class="eyebrow">Socio fundador</span>
           <h3>Carlos Carrizosa</h3>
-          <div class="partner-role">Litigación civil, penal y social</div>
+          <div class="partner-role">Litigación civil, penal y mercantil</div>
           <p class="partner-bio">
             Socio fundador del despacho, es abogado desde 1989. Tiene amplia experiencia en asesoría y defensa en litigios en los Tribunales de Justicia. Ha sido diputado de 2012 a 2024 en el Parlamento de Cataluña y portavoz en su comisión de Justicia.
           </p>
@@ -1287,7 +1306,7 @@
             <div class="credential">Abogado en ejercicio desde 1989</div>
             <div class="credential">Diputado en el Parlamento de Cataluña (2012–2024)</div>
             <div class="credential">Portavoz en la Comisión de Justicia del Parlament</div>
-            <div class="credential">Defensa en Tribunales de Justicia · jurisdicciones civil, penal y social</div>
+            <div class="credential">Defensa en Tribunales de Justicia · asuntos civiles, penales y mercantiles</div>
           </div>
           <div class="partner-contact">
             <a href="tel:934572123">
@@ -1374,7 +1393,7 @@
         <div class="step">
           <div class="step-num">Paso 01</div>
           <h3>Consulta inicial gratuita</h3>
-          <p>Nos sentamos con usted — presencial o por videoconferencia — para entender la situación familiar, los bienes en juego y los plazos. Salimos con un diagnóstico claro.</p>
+          <p>Nos sentamos con usted (presencial o por videoconferencia) para entender la situación familiar, los bienes en juego y los plazos. Salimos con un diagnóstico claro.</p>
         </div>
         <div class="step">
           <div class="step-num">Paso 02</div>
@@ -1384,12 +1403,12 @@
         <div class="step">
           <div class="step-num">Paso 03</div>
           <h3>Tramitación integral</h3>
-          <p>Notaría, Registro, Hisenda de Catalunya, bancos, plusvalía municipal. Coordinamos todos los actores; usted firma cuando todo está listo.</p>
+          <p>Notaría, Registro, Impuestos, bancos, plusvalía municipal. Coordinamos todos los actores; usted firma cuando todo está listo.</p>
         </div>
         <div class="step">
           <div class="step-num">Paso 04</div>
           <h3>Cierre y entrega</h3>
-          <p>Recibe los bienes inscritos a su nombre, los impuestos liquidados y un dossier ordenado de toda la sucesión. Sin frentes abiertos.</p>
+          <p>Recibe los bienes inscritos a su nombre, los impuestos liquidados y un dossier ordenado de toda la sucesión.</p>
         </div>
       </div>
     </div>
@@ -1442,13 +1461,13 @@
           <span class="eyebrow">Preguntas frecuentes</span>
           <h2 style="margin-top:24px">Las dudas <em>más habituales.</em></h2>
         </div>
-        <p>Las preguntas que recibimos cada semana en la primera consulta. Si la suya no está aquí, escríbanos — le respondemos en menos de 24 horas hábiles.</p>
+        <p>Las preguntas que recibimos cada semana en la primera consulta. Si la suya no está aquí, escríbanos y le respondemos en 24 horas.</p>
       </div>
 
       <div class="faq-list">
         <details class="qa" open>
           <summary>¿Qué documentación necesito para iniciar una herencia?</summary>
-          <div class="answer">Certificado de defunción, certificado de Últimas Voluntades, copia del testamento (si existe), DNI del fallecido y de los herederos, escrituras de inmuebles, certificados bancários de saldos a fecha de fallecimiento, pólizas de seguros de vida y documentación de vehículos. Le entregaremos un listado personalizado en la primera consulta.</div>
+          <div class="answer">Certificado de defunción, certificado de Últimas Voluntades, copia del testamento (si existe), DNI del fallecido y de los herederos, escrituras de inmuebles, certificados bancarios de saldos a fecha de fallecimiento, pólizas de seguros de vida y documentación de vehículos. Le entregaremos un listado personalizado en la primera consulta; también puede adelantar trabajo con nuestro <a href="/documentos-herencia/">checklist de documentos</a>.</div>
         </details>
         <details class="qa">
           <summary>¿Cuánto tarda en tramitarse una herencia?</summary>
@@ -1456,7 +1475,7 @@
         </details>
         <details class="qa">
           <summary>¿Qué ocurre si el fallecido no dejó testamento?</summary>
-          <div class="answer">Se tramita una declaración de herederos abintestato ante notario — o judicialmente, si no hay parientes cercanos. La ley catalana establece el orden de llamamiento: descendientes, cónyuge o conviviente, ascendientes, hermanos y sobrinos. Nos encargamos del expediente íntegro.</div>
+          <div class="answer">Se tramita una declaración de herederos abintestato ante notario, o judicialmente si no hay parientes cercanos. La ley catalana establece el orden de llamamiento: descendientes, cónyuge o conviviente, ascendientes, hermanos y sobrinos. Nos encargamos del expediente íntegro.</div>
         </details>
         <details class="qa">
           <summary>¿Puedo renunciar a una herencia con deudas?</summary>
@@ -1464,15 +1483,15 @@
         </details>
         <details class="qa">
           <summary>¿Cuánto se paga de Impuesto de Sucesiones en Cataluña?</summary>
-          <div class="answer">Depende del parentesco: el cónyuge o pareja estable tiene una bonificación del 99% de la cuota; los hijos menores de 21 años, bonificaciones por tramos del 99% al 20%; los hijos mayores de 21 y los ascendientes, del 60% al 0% según el importe heredado; y hermanos o sobrinos no tienen bonificación (aunque sí una pequeña reducción). Use nuestro <a href="#calculadora">simulador orientativo</a> o agéndenos una consulta para un cálculo exacto.</div>
+          <div class="answer">Depende del parentesco: el cónyuge o pareja estable tiene una bonificación del 99% de la cuota; los hijos menores de 21 años, bonificaciones por tramos del 99% al 20%; los hijos mayores de 21 y los ascendientes, del 60% al 0% según el importe heredado; y hermanos o sobrinos no tienen bonificación (aunque sí una pequeña reducción). Use nuestro <a href="/impuesto-de-sucesiones/">simulador orientativo</a> o agéndenos una consulta para un cálculo exacto.</div>
         </details>
         <details class="qa">
           <summary>¿Qué hago si hay desacuerdo entre los herederos?</summary>
-          <div class="answer">Primero intentamos siempre la negociación y la mediación: el 98% de los conflictos se resuelven sin acudir a tribunales y a un coste mucho menor. Si no es posible, defendemos sus derechos por vía judicial: impugnación de testamento, acción de petición de herencia, acción de partición o reclamación de legítima.</div>
+          <div class="answer">Primero intentamos siempre la negociación y la mediación: la mayoría de los conflictos se resuelven sin acudir a tribunales y a un coste mucho menor. Si no es posible, defendemos sus derechos por vía judicial: impugnación de testamento, acción de petición de herencia, acción de partición o reclamación de legítima.</div>
         </details>
         <details class="qa">
           <summary>¿Cuánto cuestan sus servicios?</summary>
-          <div class="answer">La primera consulta es siempre gratuita y sin compromiso. Tras analizar su caso le presentamos un presupuesto cerrado por escrito — sin sorpresas posteriores. Trabajamos con honorarios fijos por fases o con porcentaje sobre el caudal hereditario, según convenga al cliente.</div>
+          <div class="answer">La primera consulta es siempre gratuita y sin compromiso. Tras analizar su caso le presentamos un presupuesto cerrado por escrito, sin sorpresas posteriores. Trabajamos con honorarios fijos por fases o con porcentaje sobre el caudal hereditario.</div>
         </details>
       </div>
     </div>
@@ -1492,7 +1511,7 @@
         <div class="contact-detail">
           <div class="lbl">Despacho</div>
           <div class="val">
-            Calle Pau Claris 171
+            Calle Pau Claris 171, Entresuelo 2ª
             <small>08037 Barcelona</small>
           </div>
         </div>
@@ -1507,7 +1526,7 @@
           <div class="lbl">Correo</div>
           <div class="val">
             <a href="mailto:abogados@carrizosayalmazor.com">abogados@carrizosayalmazor.com</a>
-            <small>Respuesta en menos de 24 h hábiles</small>
+            <small>Le respondemos en 24 horas</small>
           </div>
         </div>
         <div class="contact-detail">
@@ -1567,14 +1586,14 @@
 
         <label class="checkbox-row">
           <input type="checkbox" id="privacidad" name="privacidad" required />
-          <span>He leído y acepto las <a href="https://www.carrizosayalmazor.com/condiciones-uso" target="_blank" rel="noopener">Condiciones de Uso</a> y la <a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+          <span>He leído y acepto las <a href="https://www.carrizosayalmazor.com/condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a> y la <a href="https://www.carrizosayalmazor.com/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>, y consiento el tratamiento de mis datos, conforme al RGPD, para gestionar mi consulta.</span>
         </label>
 
         <button type="submit" class="form-submit" id="btn-enviar">Enviar mensaje</button>
         <div class="form-note">Tratamos sus datos bajo secreto profesional · RGPD</div>
 
         <p id="form-exito" style="display:none;margin-top:16px;padding:16px 20px;background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;font-size:14px;">
-          Gracias por contactar con nosotros. Le responderemos en menos de 24 horas.
+          Gracias por contactar con nosotros. Le responderemos en 24 horas.
         </p>
         <p id="form-error" style="display:none;margin-top:16px;padding:16px 20px;background:#fce4ec;color:#c62828;border:1px solid #f8bbd0;font-size:14px;">
           Oops, algo ha salido mal. Por favor, inténtelo más tarde o llámenos al +34 934 572 123.
@@ -1656,7 +1675,7 @@
         <div class="footer-col">
           <h4>Contacto</h4>
           <ul>
-            <li>Calle Pau Claris 171</li>
+            <li>Calle Pau Claris 171, Entresuelo 2ª</li>
             <li>08037 Barcelona</li>
             <li><a href="tel:934572123">+34 934 572 123</a></li>
             <li><a href="mailto:abogados@carrizosayalmazor.com">abogados@carrizosayalmazor.com</a></li>
@@ -1666,8 +1685,8 @@
       <div class="footer-bottom">
         <div>© 2026 Carrizosa y Almazor · Todos los derechos reservados</div>
         <div class="legal">
-          <a href="https://www.carrizosayalmazor.com/condiciones-uso" target="_blank" rel="noopener">Condiciones de Uso</a>
-          <a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>
+          <a href="https://www.carrizosayalmazor.com/condiciones.html" target="_blank" rel="noopener">Condiciones de Uso</a>
+          <a href="https://www.carrizosayalmazor.com/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>
           <a href="#" onclick="cyaCookiePrefs();return false;">Cookies</a>
         </div>
       </div>
@@ -1687,7 +1706,7 @@
         Utilizamos cookies de Google Ads únicamente para medir la eficacia de nuestra
         publicidad. No se activan si usted no lo acepta, y puede cambiar su elección en
         cualquier momento desde el enlace «Cookies» del pie de página.
-        <a href="https://www.carrizosayalmazor.com/politica-privacidad" target="_blank" rel="noopener">Más información</a>
+        <a href="https://www.carrizosayalmazor.com/privacidad.html" target="_blank" rel="noopener">Más información</a>
       </p>
       <div class="cookie-actions">
         <button class="cookie-btn rechazar" id="cookie-rechazar">Rechazar</button>
@@ -1702,14 +1721,19 @@
     (function(){
       var banner = document.getElementById('cookie-banner');
       if(!banner) return;
+      function abrir(){
+        banner.classList.add('visible');
+        document.body.classList.add('cookie-abierta');
+      }
       function cerrar(acepta){
         window.cyaConsent.guardar(acepta);
         banner.classList.remove('visible');
+        document.body.classList.remove('cookie-abierta');
       }
       document.getElementById('cookie-aceptar').addEventListener('click', function(){ cerrar(true); });
       document.getElementById('cookie-rechazar').addEventListener('click', function(){ cerrar(false); });
-      window.cyaCookiePrefs = function(){ banner.classList.add('visible'); };
-      if (window.cyaConsent.leer() === null) banner.classList.add('visible');
+      window.cyaCookiePrefs = abrir;
+      if (window.cyaConsent.leer() === null) abrir();
     })();
 
     // Conversiones Google Ads por clic: teléfono y WhatsApp
